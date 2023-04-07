@@ -1,0 +1,3 @@
+first_name: "Иванов", middle_name: "Иван", surname: "Иванович", id: 1
+first_name: "Петров", middle_name: "Пётр", surname: "Петрович", id: 2, telegram: "@petya"
+first_name: "Александров", middle_name: "Александр", surname: "Александрович", id: 2, telegram: "@sanya", mail: "ilisha@mail.ru"
