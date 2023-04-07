@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../dent'
-
 class DataTable
 
   attr_reader :str_count, :st_count

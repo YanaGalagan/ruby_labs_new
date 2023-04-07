@@ -1,6 +1,6 @@
 
 require 'json'
-require_relative '../dent_short'
+require_relative 'student_short'
 class Student < StudentShort
 
 

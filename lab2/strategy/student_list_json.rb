@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative '../dent_list_strat'
+require_relative 'student_list_strat'
 require 'json'
 
 class StudentListJson < StudentListStrategy

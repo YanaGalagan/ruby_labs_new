@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'lab2/nt'
-require_relative 'lab2/student_short'
-require_relative 'lab2/data_list_student_short'
-require_relative 'lab2/student_list_base'
-require_relative 'lab2/student_list_txt'
-require_relative 'lab2/student_list_json'
-require_relative 'lab2/student_list_yaml'
+require_relative '../student/student'
+require_relative '../student/student_short'
+require_relative '../all_data/data_list_student_short'
+require_relative '../strategy/student_list_base'
+require_relative '../strategy/student_list_txt'
+require_relative '../strategy/student_list_json'
+require_relative '../strategy/student_list_yaml'
 require 'json'
 
 student1 = Student.new(first_name:'Иван', middle_name:'Иванович' ,surname:'Иванов',id:1,phone_number:'+79285698741',
