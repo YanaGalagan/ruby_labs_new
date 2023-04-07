@@ -1,5 +1,5 @@
 
-require_relative '../dent'
+require_relative '../student'
 require_relative 'student_short'
 require_relative 'lab2/data_table'
 
