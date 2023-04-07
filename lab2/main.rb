@@ -1,7 +1,7 @@
 
-require_relative 'student'
+require_relative '../dent'
 require_relative 'student_short'
-require_relative 'data_table'
+require_relative 'lab2/data_table'
 
 student1 = Student.new(first_name:'Иван', middle_name:'Иванович' ,surname:'Иванов',id:1,phone_number:'+79285698741',
                        mail:'ivan555@yandex.ru', git:'github.com/vanSuper', telegram:'@Vanusha')

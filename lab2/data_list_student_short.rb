@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'data_list'
+require_relative 'lab2/list'
 
 class DataListStudentShort < DataList
 
