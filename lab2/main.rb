@@ -1,6 +1,6 @@
 
 require_relative '../student'
-require_relative 'student_short'
+require_relative 'student/student_short'
 require_relative 'lab2/data_table'
 
 student1 = Student.new(first_name:'Иван', middle_name:'Иванович' ,surname:'Иванов',id:1,phone_number:'+79285698741',
