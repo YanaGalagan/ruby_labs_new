@@ -53,5 +53,4 @@ end
 #result.each {|th| puts th.join "\s"}
 
 db = StudentListDB.new
-
 puts db.count_student
