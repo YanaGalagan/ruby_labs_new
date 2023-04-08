@@ -1,15 +1,14 @@
 # frozen_string_literal: true
-
+require_relative 'db_university'
 class StudentListDB
 
-  def initialize(address)
-    self.client = SQLite3::Database.open address
+  def initialize
+    self.client = DBUniversity.instance
   end
 
   def student_by_id(id_student)
-    client.results_as_hash = true
     hash = client.prepare('SELECT * FROM students WHERE id = ?').execute(id_student).first
-    client.results_as_hash = false
+    print(hash)
     return nil if hash.nil?
 
     Student.new(**hash)
@@ -23,25 +22,23 @@ class StudentListDB
   end
 
   def delete_student(id_student)
-    st = self.client.prepare('DELETE FROM students WHERE id = ?')
-    st.execute(id_student)
+    client.prepare_exec('DELETE FROM students WHERE id = ?', id_student)
   end
 
   def replace_student(id_student, student)
-    stmt = client.prepare('UPDATE students SET first_name=?, middle_name=?, surname=?, phone_number=?, telegram=?, email=?, git=? WHERE id=?')
-    stmt.execute(*student_attr(student), id_student)
+    st ='UPDATE students SET first_name=?, middle_name=?, surname=?, phone_number=?, telegram=?, email=?, git=? WHERE id=?'
+    client.prepare_exec(st,*student_attr(student), id_student)
   end
 
   def count_student
-    st = self.client.prepare "Select COUNT(id) from students"
-    st.execute.next[0]
+    client.query('SELECT COUNT(id) FROM students').next[0]
   end
 
   def get_k_n_student_short_list(k,n)
-    self.client.results_as_hash = true
+
     students = client.prepare('SELECT * FROM students LIMIT ? OFFSET ?').execute((k-1)*n,n)
     slice = students.map { |h| StudentShort.new(Student.from_hash(h)) }
-    self.client.results_as_hash = false
+
     DataListStudentShort.new(slice)
   end
 

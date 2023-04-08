@@ -4,6 +4,7 @@ require_relative 'student/student_short'
 require_relative 'all_data/data_table'
 require 'yaml'
 require 'sqlite3'
+require_relative 'database/student_list_db'
 
 student1 = Student.new(first_name:'Иван', middle_name:'Иванович' ,surname:'Иванов',id:1,phone_number:'+79285698741',
                        mail:'ivan555@yandex.ru', git:'github.com/vanSuper', telegram:'@Vanusha')
@@ -46,7 +47,10 @@ def write_to_txt(adress, arr_student)
   end
 end
 
-db = SQLite3::Database.open './university.sql'
-sel = db.prepare "Select * from students"
-result = sel.execute
-result.each {|th| puts th.join "\s"}
+#db = SQLite3::Database.open './university.sql'
+#sel = db.prepare "Select * from students"
+#result = sel.execute
+#result.each {|th| puts th.join "\s"}
+
+db = StudentListDB.new
+puts db.count_student
