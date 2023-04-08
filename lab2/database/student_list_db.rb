@@ -1,17 +1,28 @@
 # frozen_string_literal: true
 require_relative 'db_university'
+require 'json'
 class StudentListDB
 
   def initialize
     self.client = DBUniversity.instance
   end
 
+  def into_hash(arr)
+    attrs = {}
+    i=0
+    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
+      attrs[attr] = arr[i] unless arr[i].nil?
+      i=i+1
+    end
+    attrs
+  end
+
   def student_by_id(id_student)
-    hash = client.prepare('SELECT * FROM students WHERE id = ?').execute(id_student).first
-    print(hash)
+    hash = client.prepare_exec('SELECT * FROM students WHERE id = ?',id_student).first
+    hash = into_hash(hash)
     return nil if hash.nil?
 
-    Student.new(**hash)
+    Student.new(**hash).to_s
   end
 
   def add_student(student)
@@ -41,6 +52,8 @@ class StudentListDB
 
     DataListStudentShort.new(slice)
   end
+
+
 
   private
 

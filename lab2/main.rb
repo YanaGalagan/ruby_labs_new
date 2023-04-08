@@ -54,3 +54,5 @@ end
 
 db = StudentListDB.new
 puts db.count_student
+puts db.student_by_id(9)
+
