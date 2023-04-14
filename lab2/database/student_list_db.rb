@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'db_university'
 require 'json'
-class StudentListDB
+class StudentListDBAdapter
 
   def initialize
     self.client = DBUniversity.instance

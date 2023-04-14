@@ -54,7 +54,7 @@ class StudentListBase
     students.size
   end
 
-  def k_n_student_short_list(k, n, data_list: nil)
+  def k_n_student_short_list(k, n, data_list)
     move = (k - 1) * n
     piece = students[move, n].map {|stud| StudentShort.new(stud) }
     return DataListStudentShort.new(piece) if data_list.nil?
