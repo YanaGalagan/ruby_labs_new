@@ -54,5 +54,5 @@ end
 
 db = StudentListDBAdapter.new
 puts db.count_student
-puts db.student_by_id(9)
+puts db.student_by_id(8)
 
