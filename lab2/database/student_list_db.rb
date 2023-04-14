@@ -37,7 +37,7 @@ class StudentListDBAdapter
   end
 
   def replace_student(id_student, student)
-    st ='UPDATE students SET first_name=?, middle_name=?, surname=?, phone_number=?, telegram=?, email=?, git=? WHERE id=?'
+    st ='UPDATE students SET first_name=?, middle_name=?, surname=?, phone_number=?, telegram=?, mail=?, git=? WHERE id=?'
     client.prepare_exec(st,*student_attr(student), id_student)
   end
 
