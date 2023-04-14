@@ -52,7 +52,7 @@ end
 #result = sel.execute
 #result.each {|th| puts th.join "\s"}
 
-db = StudentListDB.new
+db = StudentListDBAdapter.new
 puts db.count_student
 puts db.student_by_id(9)
 

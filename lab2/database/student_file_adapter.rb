@@ -22,7 +22,7 @@ class StudentFileAdapter
   end
 
   def replace_student(id_student, student)
-    @file.replace_student(student, id_student)
+    @file.replace_student(id_student, student)
     @file.save_to_file(@file_address)
   end
 
