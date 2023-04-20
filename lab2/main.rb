@@ -5,6 +5,8 @@ require_relative 'all_data/data_table'
 require 'yaml'
 require 'sqlite3'
 require_relative 'database/student_list_db'
+require_relative 'database/student_file_adapter'
+require_relative 'database/window'
 
 student1 = Student.new(first_name:'Иван', middle_name:'Иванович' ,surname:'Иванов',id:1,phone_number:'+79285698741',
                        mail:'ivan555@yandex.ru', git:'github.com/vanSuper', telegram:'@Vanusha')
@@ -52,7 +54,9 @@ end
 #result = sel.execute
 #result.each {|th| puts th.join "\s"}
 
-db = StudentListDBAdapter.new
-puts db.count_student
-puts db.student_by_id(8)
+# db = StudentListDBAdapter.new
+# puts db.count_student
+# puts db.student_by_id(8)
+main_window = Window.new.create
+main_window.show
 
