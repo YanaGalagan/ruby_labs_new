@@ -4,7 +4,7 @@ require_relative 'logic'
 class Window
   include Glimmer
   def create
-    window('Tabs', 700, 500) {
+    window('Tabs', 1000, 500) {
       margined true
       tab {
         tab_item('Tab 1') {

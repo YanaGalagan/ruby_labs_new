@@ -49,25 +49,35 @@ class LogicFromWindow
 
       #2 область
       vertical_box {
-        @table = table {
 
-          text_column('ФИО')
-          text_column('Контакт')
-          text_column('Гит')
+        stretchy true
+        @table = table {
+          text_column('ФИО') {
+            on_clicked do
+              sort_by_column(0)
+            end
+          }
+          text_column('Гит') {
+            on_clicked do
+              sort_by_column(2)
+            end
+          }
+          text_column('Контакт') {
+            on_clicked do
+              sort_by_column(1)
+            end
+          }
 
           editable false
-        }
 
-
-        @pages = horizontal_box {
-          stretchy false
-
-          button('1')
-          button('2')
-          label('...') { stretchy false }
-          button('15')
+          cell_rows [['Иванов И.И. ', '@vinya', 'ivan@mail.ru'],
+                     ['Петров П.П.', '@petr', '+79384568921'],
+                     ['Сидоров С.С.', '@sidorov567', 'sidorsidorov@mail.ru']]
         }
       }
+
+
+
 
       # 3 область
       vertical_box {
@@ -79,8 +89,19 @@ class LogicFromWindow
         button('Обновить') { stretchy false }
       }
     }
-
-    # Добавление строк в таблицу:
-
   }
+  private
+  def sort_by_column(column_index)
+    data = @table.cell_rows
+    if @sort_column == column_index
+      data.reverse!
+      @sort_order = (@sort_order == :asc) ? :desc : :asc
+    else
+      @sort_column = column_index
+      @sort_order = :asc
+      data.sort_by! { |row| row[column_index].to_s }
+    end
+    @table.cell_rows = data
+  end
+
 end
