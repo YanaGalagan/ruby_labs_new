@@ -7,15 +7,7 @@ class StudentListDBAdapter
     self.client = DBUniversity.instance
   end
 
-  def into_hash(arr)
-    attrs = {}
-    i=0
-    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
-      attrs[attr] = arr[i] unless arr[i].nil?
-      i=i+1
-    end
-    attrs
-  end
+
 
   def student_by_id(id_student)
     hash = client.prepare_exec('SELECT * FROM students WHERE id = ?',id_student).first
@@ -62,6 +54,16 @@ class StudentListDBAdapter
     [student.first_name, student.middle_name, student.surname,
      student.phone_number, student.telegram,
      student.mail, student.git]
+  end
+
+  def into_hash(arr)
+    attrs = {}
+    i=0
+    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
+      attrs[attr] = arr[i] unless arr[i].nil?
+      i=i+1
+    end
+    attrs
   end
 
 end
