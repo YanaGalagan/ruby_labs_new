@@ -77,6 +77,10 @@ class LogicFromWindow
         stretchy true
         @table = refined_table(
           table_editable: false,
+          filter: lambda do |row_hash, query|
+            utf8_query = query.force_encoding("utf-8")
+            row_hash['ФИО'].include?(utf8_query)
+          end,
           table_columns: {
             '#' => :text,
             'Фамилия И. О' => :text,
@@ -115,10 +119,11 @@ class LogicFromWindow
         button('Добавить') { stretchy false}
         button('Изменить') { stretchy false }
         button('Удалить') { stretchy false }
-        button('Обновить') { stretchy false
-        on_clicked do
-          puts 123
-        end
+        button('Обновить') {
+          stretchy false
+          on_clicked {
+            @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+          }
         }
       }
     }
@@ -127,16 +132,16 @@ class LogicFromWindow
     end
   private
   def sort_by_column(column_index)
-    data = @table.cell_rows
-    if @sort_column == column_index
-      data.reverse!
-      @sort_order = (@sort_order == :asc) ? :desc : :asc
-    else
-      @sort_column = column_index
-      @sort_order = :asc
-      data.sort_by! { |row| row[column_index].to_s }
-    end
-    @table.cell_rows = data
+     data = @table.cell_rows
+      if @sort_column == column_index
+        data.reverse!
+        @sort_order = (@sort_order == :asc) ? :desc : :asc
+      else
+        @sort_column = column_index
+        @sort_order = :asc
+        data.sort_by! { |row| row[column_index].to_s }
+      end
+      @table.cell_rows = data
   end
 
 end

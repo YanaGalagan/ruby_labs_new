@@ -5,6 +5,7 @@ require_relative 'logic'
 require_relative 'student_list'
 require_relative 'student_list_db'
 require_relative '../all_data/data_list_student_short'
+require 'glimmer-dsl-libui'
 
 class StudentListController
   def initialize(view)
@@ -22,7 +23,16 @@ class StudentListController
   end
 
   def refresh_data(k,n)
+    begin
     @data_list = @student_list.k_n_student_short_list(k, n, @data_list)
     @view.update_student_count(@student_list.count_student)
+    rescue
+      on_db_conn_error
+    end
+  end
+  def on_db_conn_error
+    script = 'display dialog "Отсутсвует подключение к БД" with title "Ошибка"'
+    system 'osascript', '-e', script
+    exit(false)
   end
 end
