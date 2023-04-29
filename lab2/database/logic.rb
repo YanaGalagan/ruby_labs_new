@@ -1,9 +1,14 @@
 
 require 'glimmer-dsl-libui'
+require_relative 'controller'
 class LogicFromWindow
-  include Glimmer::LibUI::CustomControl
+  include Glimmer
 
-  body {
+  def initialize
+    @controller = StudentListController.new(self)
+  end
+
+  def create
     horizontal_box {
 
       # 1 область
@@ -89,7 +94,7 @@ class LogicFromWindow
         button('Обновить') { stretchy false }
       }
     }
-  }
+    end
   private
   def sort_by_column(column_index)
     data = @table.cell_rows
