@@ -142,9 +142,9 @@ class Student < StudentShort
   end
 
   def contact
-    return @contact = "phone_number= #{phone_number}" unless phone_number.nil?
-    return @contact = "telegram= #{telegram}" unless telegram.nil?
-    return @contact = "mail= #{mail}" unless email.nil?
+    return @contact = {phone_number: phone_number} unless phone_number.nil?
+    return @contact = {telegram: telegram} unless telegram.nil?
+    return @contact = {mail: mail} unless email.nil?
 
     nil
   end
