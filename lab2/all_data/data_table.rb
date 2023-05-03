@@ -26,10 +26,6 @@ class DataTable
     table.dup
   end
 
-  def to_s
-    table.map { |row| "[#{row.join(', ')}]" }.join("\n")
-  end
-
   private
   attr_accessor :table
   attr_writer :str_count, :st_count

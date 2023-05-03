@@ -1,21 +1,14 @@
 # frozen_string_literal: true
 require_relative 'db_university'
 require 'json'
+require 'sqlite3'
 class StudentListDBAdapter
 
   def initialize
     self.client = DBUniversity.instance
   end
 
-  def into_hash(arr)
-    attrs = {}
-    i=0
-    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
-      attrs[attr] = arr[i] unless arr[i].nil?
-      i=i+1
-    end
-    attrs
-  end
+
 
   def student_by_id(id_student)
     hash = client.prepare_exec('SELECT * FROM students WHERE id = ?',id_student).first
@@ -46,9 +39,9 @@ class StudentListDBAdapter
   end
 
   def get_k_n_student_short_list(k,n, data_list=nil)
-    offset = (k - 1) * n
-    students = client.prepare_exec('SELECT * FROM students LIMIT ?, ?', offset, n)
 
+    offset = (k-1)*n
+    students = client.prepare_exec('SELECT * FROM students LIMIT ?, ?', offset, n)
     slice = students.map { |h|
       h = h.transform_keys(&:to_sym)
       StudentShort.new(Student.from_hash(h))
@@ -68,6 +61,16 @@ class StudentListDBAdapter
     [student.first_name, student.middle_name, student.surname,
      student.phone_number, student.telegram,
      student.mail, student.git]
+  end
+
+  def into_hash(arr)
+    attrs = {}
+    i=0
+    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
+      attrs[attr] = arr[i] unless arr[i].nil?
+      i=i+1
+    end
+    attrs
   end
 
 end

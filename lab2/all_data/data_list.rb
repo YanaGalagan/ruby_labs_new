@@ -1,23 +1,11 @@
 # frozen_string_literal: true
-require_relative 'data_table'
-class DataList
 
+class DataList
+  private_class_method :new
   attr_writer :list
   def initialize(objects)
     self.sel_objects = []
     self.list = objects
-    @observers = []
-  end
-
-  def add_observer(observer)
-    @observers.append(observer)
-  end
-
-  def remove_observer(observer)
-    @observers.delete(observer)
-  end
-  def notify
-    @observers.each { |observer| observer.on_datalist_changed(get_data) }
   end
 
   def select(number)
@@ -45,11 +33,6 @@ class DataList
       id += 1
     end
     DataTable.new(result)
-  end
-
-  def replace_objects(objects)
-    self.list = objects.dup
-    notify
   end
 
   protected
