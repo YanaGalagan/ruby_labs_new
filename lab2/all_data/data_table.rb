@@ -22,7 +22,13 @@ class DataTable
     table[str][st]
   end
 
+  def to_my_array
+    table.dup
+  end
 
+  def to_s
+    table.map { |row| "[#{row.join(', ')}]" }.join("\n")
+  end
 
   private
   attr_accessor :table
