@@ -1,14 +1,21 @@
 # frozen_string_literal: true
 require_relative 'db_university'
 require 'json'
-require 'sqlite3'
 class StudentListDBAdapter
 
   def initialize
     self.client = DBUniversity.instance
   end
 
-
+  def into_hash(arr)
+    attrs = {}
+    i=0
+    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
+      attrs[attr] = arr[i] unless arr[i].nil?
+      i=i+1
+    end
+    attrs
+  end
 
   def student_by_id(id_student)
     hash = client.prepare_exec('SELECT * FROM students WHERE id = ?',id_student).first
@@ -38,18 +45,12 @@ class StudentListDBAdapter
     client.query('SELECT COUNT(id) FROM students').next[0]
   end
 
-  def get_k_n_student_short_list(k,n, data_list=nil)
+  def get_k_n_student_short_list(k,n)
 
-    offset = (k-1)*n
-    students = client.prepare_exec('SELECT * FROM students LIMIT ?, ?', offset, n)
-    slice = students.map { |h|
-      h = h.transform_keys(&:to_sym)
-      StudentShort.new(Student.from_hash(h))
-    }
-    return DataListStudentShort.new(slice) if data_list.nil?
+    students = client.prepare('SELECT * FROM students LIMIT ? OFFSET ?').execute((k-1)*n,n)
+    slice = students.map { |h| StudentShort.new(Student.from_hash(h)) }
 
-    data_list.replace_objects(slice)
-    data_list
+    DataListStudentShort.new(slice)
   end
 
 
@@ -61,16 +62,6 @@ class StudentListDBAdapter
     [student.first_name, student.middle_name, student.surname,
      student.phone_number, student.telegram,
      student.mail, student.git]
-  end
-
-  def into_hash(arr)
-    attrs = {}
-    i=0
-    %i[id first_name middle_name surname phone_number telegram mail git].each do |attr|
-      attrs[attr] = arr[i] unless arr[i].nil?
-      i=i+1
-    end
-    attrs
   end
 
 end

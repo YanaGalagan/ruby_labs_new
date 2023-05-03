@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require_relative '../strategy/student_list_base'
-require 'sqlite3'
 class StudentFileAdapter
   def initialize(type_file,file_address)
     @file = StudentListBase.new(type_file)

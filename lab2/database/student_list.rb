@@ -27,8 +27,8 @@ class StudentList
     @adapter.count_student
   end
 
-  def get_k_n_student_short_list(k,n, data_list=nil)
-    @adapter.get_k_n_student_short_list(k,n, data_list)
+  def get_k_n_student_short_list(k,n)
+    @adapter.get_k_n_student_short_list(k,n)
   end
 
 end
