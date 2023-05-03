@@ -3,6 +3,8 @@
 class DataList
   private_class_method :new
   attr_writer :list
+
+
   def initialize(objects)
     self.sel_objects = []
     self.list = objects
