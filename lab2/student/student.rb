@@ -50,6 +50,9 @@ class Student < StudentShort
     "#{surname} #{first_name[0]}. #{middle_name[0]}."
   end
 
+  def self.into_hash(hash)
+    Student.new(**hash)
+  end
   def get_info
     result = "#{short_name}" if !(first_name.nil? or middle_name.nil? or surname.nil?)
     result += " #{get_contact}"  unless get_contact.nil?
@@ -142,10 +145,9 @@ class Student < StudentShort
   end
 
   def contact
-    return @contact = "phone_number= #{phone_number}" unless phone_number.nil?
-    return @contact = "telegram= #{telegram}" unless telegram.nil?
-    return @contact = "mail= #{mail}" unless email.nil?
-
+    return @contact = {phone_number: phone_number} unless phone_number.nil?
+    return @contact = {telegram: telegram} unless telegram.nil?
+    return @contact = {mail: mail} unless mail.nil?
     nil
   end
 

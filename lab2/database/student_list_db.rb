@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require_relative 'db_university'
 require 'json'
+require 'sqlite3'
 class StudentListDBAdapter
 
   def initialize
@@ -45,12 +46,19 @@ class StudentListDBAdapter
     client.query('SELECT COUNT(id) FROM students').next[0]
   end
 
-  def get_k_n_student_short_list(k,n)
+  def get_k_n_student_short_list(k,n,data_list=nil )
 
-    students = client.prepare('SELECT * FROM students LIMIT ? OFFSET ?').execute((k-1)*n,n)
-    slice = students.map { |h| StudentShort.new(Student.from_hash(h)) }
+    offset = (k - 1) * n
+    students = client.prepare_exec('SELECT * FROM students LIMIT ?, ?', offset, n)
 
-    DataListStudentShort.new(slice)
+    slice = students.map { |h|
+      h = h.transform_keys(&:to_sym)
+      StudentShort.new(Student.into_hash(h))
+    }
+    return DataListStudentShort.new(slice) if data_list.nil?
+
+    data_list.replace_objects(slice)
+    data_list
   end
 
 

@@ -58,6 +58,6 @@ end
 # puts db.count_student
 # puts db.student_by_id(8)
 
-main_window = Window.new.create
+main_window = MainWindow.new.create
 main_window.show
 

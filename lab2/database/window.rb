@@ -1,20 +1,25 @@
 # frozen_string_literal: true
+
 require 'glimmer-dsl-libui'
 require_relative 'logic'
-class Window
+
+class MainWindow
   include Glimmer
+
+  def initialize
+    @logic_tab = LogicWindow.new
+  end
   def create
-    window('Tabs', 1000, 500) {
+    window('Универ', 1200, 700) {
       margined true
       tab {
-        tab_item('Tab 1') {
-          logicfromwindow
+        tab_item('Студенты') {
 
+          @logic_tab.create
         }
 
-
-        tab_item('Tab 2') { }
-        tab_item('Tab 3') { }
+        tab_item('Вкладка 2') { }
+        tab_item('Вкладка 3') { }
       }
     }
   end
