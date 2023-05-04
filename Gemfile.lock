@@ -36,6 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   glimmer-dsl-libui
+  libui
   sqlite3
 
 BUNDLED WITH
