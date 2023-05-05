@@ -19,7 +19,7 @@ class LogicWindow
 
   def on_datalist_changed(new_table)
     arr = new_table.to_my_array
-    arr.map { |row| row[3] = [row[3][:phone] || row[3][:telegram] || row[3][:email]] }
+    arr.map { |row| row[3] = [row[3][:phone_number] || row[3][:telegram] || row[3][:mail]] }
     @table.model_array = arr
   end
 

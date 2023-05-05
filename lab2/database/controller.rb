@@ -30,15 +30,8 @@ class StudentListController
   end
 
   def on_db_conn_error
-    message_box = MessageBox.new(
-      title: "Ошибка подключения к базе данных",
-      text: "Произошла ошибка при подключении к базе данных. Проверьте настройки подключения и повторите попытку.",
-      parent: @view.get_root,
-      buttons: ['Выйти']
-    )
-    message_box.on_confirm do
-      exit
-    end
-    message_box.show
+    script = 'display dialog "Отсутсвует подключение к БД" with title "Ошибка"'
+    system 'osascript', '-e', script
+    exit(false)
   end
 end
