@@ -31,7 +31,7 @@ class StudentFileAdapter
     @file.count_student
   end
 
-  def get_k_n_student_short_list(page,n, data_list:nil)
+  def get_k_n_student_short_list(page,n, data_list)
     @file.get_k_n_student_short_list(page, n, data_list)
   end
 end

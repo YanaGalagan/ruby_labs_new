@@ -98,7 +98,7 @@ class Student < StudentShort
   end
 
   def middle_name=(middle_name_value)
-    raise ArgumentError, "Incorrect value: middle_name=#{middle_name}!" unless Student.is_name?(middle_name_value)
+    #raise ArgumentError, "Incorrect value: middle_name=#{middle_name}!" unless Student.is_name?(middle_name_value)
 
     @middle_name=middle_name_value
   end

@@ -30,6 +30,7 @@ GEM
     sqlite3 (1.6.2-x64-mingw-ucrt)
     super_module (1.4.1)
       method_source (>= 0.8.2, < 1.1.0)
+    win32api (0.1.0)
 
 PLATFORMS
   x64-mingw-ucrt
@@ -38,6 +39,7 @@ DEPENDENCIES
   glimmer-dsl-libui
   libui
   sqlite3
+  win32api
 
 BUNDLED WITH
    2.3.26
