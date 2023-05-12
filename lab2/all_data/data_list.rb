@@ -3,7 +3,6 @@ require_relative 'data_table'
 class DataList
   attr_writer :list
   def initialize(objects)
-    self.sel_objects = []
     self.list = objects
     @observers = []
   end
@@ -18,19 +17,13 @@ class DataList
   def notify
     @observers.each { |observer| observer.on_datalist_changed(get_data) }
   end
-  def select(number)
-    raise ArgumentError, "arg 'number' not Integer" if number.class != Integer
-    sel_objects.append(number)
+  def select_elem(number)
+    self.sel_object = number
   end
 
-  def get_selected
-    list_id=[]
-    sel_objects.each do |i|
-      list_id.append(list[i].id)
-    end
-    list_id
+  def selected_id
+    list[sel_object].id
   end
-
   def get_data
     index_id=0
     dt = list.inject([]) do |res, object|
@@ -57,6 +50,6 @@ class DataList
   end
 
   private
-  attr_accessor :sel_objects
+  attr_accessor :sel_object
   attr_reader :list
 end
