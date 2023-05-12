@@ -22,6 +22,7 @@ class StudentCreateFormController
 
   def process_fields(fields)
     student = Student.new(**fields)
+    puts student
     @student_rep.add_student(student)
     @view.close
   end

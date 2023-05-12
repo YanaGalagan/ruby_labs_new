@@ -4,7 +4,7 @@ require_relative 'student_short'
 class Student < StudentShort
 
 
-  attr_reader :first_name, :middle_name, :phone_number, :mail , :telegram
+  attr_reader :first_name,:surname, :middle_name, :phone_number, :mail , :telegram
   def self.is_phone?(phone_number)
     raise ArgumentError, "arg '#{phone_number}' is not string" unless phone_number.class == String or phone_number.nil?
     return true if phone_number=~/^(\+7|8)\s?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/ or phone_number.nil?

@@ -28,7 +28,7 @@ class StudentListDBAdapter
 
   def add_student(student)
     st = client.prepare_exec('insert into students (first_name, middle_name, surname, phone_number,
-                          telegram, mail, git) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                          telegram, mail, git) VALUES (?, ?, ?, ?, ?, ?, ?)',*student_attr(student))
   end
 
   def delete_student(id_student)
