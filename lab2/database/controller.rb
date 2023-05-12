@@ -22,16 +22,21 @@ class StudentListController
   def show_view
     @view.create.show
   end
-
+  def show_add_student
+    controller = StudentCreateFormController.new(self)
+    view = StudentCreateForm.new(controller)
+    controller.view=view
+    view.create.show
+  end
   def refresh_data(k, n)
     #Сформировать список исключительных ситуаций, который может возникнуть при выполнении включения программ
-    begin
+    #begin
     #raise StandardError, "Error DB"
     @data_list = @student_list.get_k_n_student_short_list(k, n, @data_list)
     @view.update_student_count(@student_list.count_student)
-    rescue
-       on_db_conn_error
-    end
+    #rescue
+    #   on_db_conn_error
+    #end
   end
 
   def on_db_conn_error

@@ -92,7 +92,7 @@ class Student < StudentShort
   end
 
   def first_name=(first_name_value)
-    raise ArgumentError, "Incorrect value: first_name=#{first_name}!" unless Student.is_name?(first_name_value)
+    #raise ArgumentError, "Incorrect value: first_name=#{first_name}!" unless Student.is_name?(first_name_value)
 
     @first_name=first_name_value
   end
@@ -104,7 +104,7 @@ class Student < StudentShort
   end
 
   def surname=(surname_value)
-    raise ArgumentError, "Incorrect value: surname=#{surname}!" unless Student.is_name?(surname_value)
+    #raise ArgumentError, "Incorrect value: surname=#{surname}!" unless Student.is_name?(surname_value)
 
     @surname=surname_value
   end
@@ -145,10 +145,17 @@ class Student < StudentShort
   end
 
   def contact
-    return @contact = {phone_number: phone_number} unless phone_number.nil?
-    return @contact = {telegram: telegram} unless telegram.nil?
-    return @contact = {mail: mail} unless mail.nil?
-    nil
+    # return @contact = {phone_number: phone_number} unless phone_number.nil?
+    # return @contact = {telegram: telegram} unless telegram.nil?
+    # return @contact = {mail: mail} unless mail.nil?
+    # nil
+    if phone_number
+      @contact = {type: :phone_number, value: phone_number}
+    elsif telegram
+      @contact = {type: :telegram, value: telegram}
+    elsif mail
+      @contact = {type: :mail, value: mail}
+    end
   end
 
 end

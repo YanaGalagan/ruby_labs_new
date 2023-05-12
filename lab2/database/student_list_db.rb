@@ -27,10 +27,8 @@ class StudentListDBAdapter
   end
 
   def add_student(student)
-    st = client.prepare('insert into students (first_name, middle_name, surname, phone_number,
+    st = client.prepare_exec('insert into students (first_name, middle_name, surname, phone_number,
                           telegram, mail, git) VALUES (?, ?, ?, ?, ?, ?, ?)')
-    st.execute(*student_attr(student))
-    self.client.query('SELECT seq from sqlite_sequence where name = "students"').first.first[1]
   end
 
   def delete_student(id_student)

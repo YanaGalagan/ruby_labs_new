@@ -21,7 +21,8 @@ class LogicWindow
   def on_datalist_changed(new_table)
     arr = new_table.to_my_array
     arr.map do |row|
-      row[3]=[row[3][:phone_number] || row[3][:telegram] || row[3][:mail]]
+      #row[3]=[row[3][:phone_number] || row[3][:telegram] || row[3][:mail]]
+      row[3]=row[3][:value] unless row[3].nil?
     end
 
     @table.model_array = arr
@@ -124,7 +125,7 @@ class LogicWindow
         button('Добавить') {
           stretchy false
           on_clicked{
-            StudentCreateForm.new.create.show
+            @controller.show_add_student
           }
         }
         button('Изменить') { stretchy false }
