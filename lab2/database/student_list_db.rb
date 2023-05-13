@@ -23,7 +23,7 @@ class StudentListDBAdapter
     hash = into_hash(hash)
     return nil if hash.nil?
 
-    Student.new(**hash).to_s
+    Student.new(**hash)
   end
 
   def add_student(student)

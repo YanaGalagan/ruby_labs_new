@@ -1,0 +1,77 @@
+@startuml
+ 'https://plantuml.com/class-diagram
+
+class StudentCreateForm {
+    -controller: StudentCreateFormController
+    -student: Student
+    -entries: Hash
+    --
+    +initialize(controller, student = nil)
+    +create(): Window
+    +on_create()
+    +set_value()
+    +make_readonly()
+    +close()
+}
+
+class StudentCreateFormController {
+    -view: StudentCreateForm
+    -controller
+    -student_list: StudentList
+    --
+    +initialize(controller)
+    +set_view(view)
+    +on_view_created()
+    +process_fields(Hash)
+    +on_db_conn_error()
+}
+
+ class MainWindow {
+     --
+     +create(): Window
+ }
+ class LogicWindow {
+     -controller: StudentListController
+     -current_page: Integer
+     -total_count: Integer
+     --
+     +create(): HorizontalBox
+     +on_create()
+     +on_datalist_changed(DataTable)
+     +update_student_count(Integer)
+     -sort_by_column(column_index)
+ }
+ class StudentListController {
+     -students_list: StudentList
+     -view: LogicWindow
+     -data_list: DataListStudentShort
+     --
+     +show_view()
+     +refresh_data(Integer, Integer)
+     +on_view_created()
+ }
+
+
+class StudentList {
+-data_adapter
+     +initialize()
+     +student_by_id(Integer): Student
+     +k_n_student_short_list(Integer, Integer): DataList
+     +add_student(Student)
+     +replace_student(Integer, Student)
+     +remove_student(Integer)
+     +student_count(): Integer
+}
+
+StudentCreateForm *-u- StudentCreateFormController
+StudentCreateFormController *-- StudentCreateForm
+
+StudentCreateFormController o-- StudentList
+
+StudentListController o-- StudentList
+ MainWindow *-- LogicWindow
+ LogicWindow *-- StudentListController
+ StudentListController *-- LogicWindow
+
+ @enduml
+

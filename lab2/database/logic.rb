@@ -128,8 +128,16 @@ class LogicWindow
             @controller.show_add_student
           }
         }
-        button('Изменить ФИО') { stretchy false }
-        button('Изменить git') { stretchy false }
+        button('Изменить ФИО') {
+          stretchy false
+
+          on_clicked {
+            @controller.show_edit_student(@current_page, STUDENTS_PER_PAGE, @table.selection) unless @table.selection.nil?
+          } }
+        button('Изменить git') { stretchy false
+        on_clicked{
+          puts 123
+        }}
         button('Изменить контакт') { stretchy false }
         button('Удалить') {
           stretchy false
@@ -150,6 +158,9 @@ class LogicWindow
     root_container
   end
 
+  def refresh_current_page
+    @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+  end
 
   private
 

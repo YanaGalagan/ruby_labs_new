@@ -25,6 +25,7 @@ class StudentCreateFormController
     puts student
     @student_rep.add_student(student)
     @view.close
+    @controller.view.refresh_current_page
   end
 
   def on_db_conn_error(e)
